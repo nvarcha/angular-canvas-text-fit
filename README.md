@@ -37,5 +37,14 @@ angular.module('app', ['nmv.angular']).controller('TestCtrl', ["canvasFitText", 
 
 ### Call the fit method
 ```
-
+var canvas = document.getElementById("myCanvas");
+var startXPositionOfTextInCanvas = 100;
+var startYPositionOfTextInCanvas = 200;
+var maxWidth = canvas.width;
+var maxHeight = canvas.height - startYPositionOfTextInCanvas;
+canvasFitText.fit('Text to fit', 
+                  startXPositionOfTextInCanvas,
+                  startYPositionOfTextInCanvas, 
+                  maxWidth, maxHeight, 
+                  canvas);
 ```
