@@ -48,3 +48,18 @@ canvasFitText.fit('Text to fit',
                   maxWidth, maxHeight, 
                   canvas);
 ```
+
+## Options
+There are a few options you can set up
+```
+canvasFitText.options.wordWrap = true; // false to not word wrap
+canvasFitText.options.initialFontSizeInPt = 60; // the initial size in Pt for the font
+canvasFitText.options.minimumFontSizeInPt = 1; // the minimum size in Pt the module will use
+canvasFitText.options.fontPrefix = 'bold'; // the prefix to the 'font' CSS property (i.e.: 'bold 20pt Arial')
+canvasFitText.options.fontSuffix = 'Arial'; // the suffix for the 'font' css property
+canvasFitText.options.fillStyle = '#4a63ae'; // the fill style to use for the text
+canvasFitText.options.debug = false; // true will show the targeted rectangle on the canvas 
+canvasFitText.options.dynamicLineHeight = true; // if true, the lineHeight option is multiplied with the initialFontSizeInPt, if false its used as a fixed value
+canvasFitText.options.lineHeight = 1.5; // the line spacing (see above)
+```
+
