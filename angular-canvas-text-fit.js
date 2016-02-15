@@ -52,7 +52,7 @@
                         this.__internal.pxLineHeight = this.options.dynamicLineHeight ? (fontSize * this.options.lineHeight) : this.options.lineHeight;
 
                         var totalHeightNeeded = this.getTextHeight(htmlWordWrapped);
-                        console.log('heights', maxHeight, this.__internal.pxSingleRowHeight, totalHeightNeeded, htmlWordWrapped);
+                        //console.log('heights', maxHeight, this.__internal.pxSingleRowHeight, totalHeightNeeded, htmlWordWrapped);
 
                         if (totalHeightNeeded > maxHeight) {
                             fontSize--;

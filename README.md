@@ -63,3 +63,5 @@ canvasFitText.options.dynamicLineHeight = true; // if true, the lineHeight optio
 canvasFitText.options.lineHeight = 1.5; // the line spacing (see above)
 ```
 
+## Sample Plunkr
+https://plnkr.co/edit/5lZKhDQ2VvDAldnGzrLL?p=preview
