@@ -37,6 +37,8 @@
                     this.__internal.maxWidth = maxWidth;
 
                     var htmlWordWrapped = textToFit;
+                    var lastLine = textToFit;
+                    var longestLineWidth = 0;
 
                     // Initial values setup
                     var fontSize = this.options.initialFontSizeInPt;
@@ -45,16 +47,19 @@
 
                         this.__internal.pxSingleRowHeight = this.getTextHeight(textToFit);
 
+                        var processResult = [];
                         if (this.options.wordWrap) {
-                            htmlWordWrapped = this.processText(textToFit, true);
+                            processResult = this.processText(textToFit, true);
+                            htmlWordWrapped = processResult[0];
+                            lastLine = processResult[1];
+                            longestLineWidth = processResult[2];
                         }
 
                         this.__internal.pxLineHeight = this.options.dynamicLineHeight ? (fontSize * this.options.lineHeight) : this.options.lineHeight;
 
                         var totalHeightNeeded = this.getTextHeight(htmlWordWrapped);
-                        //console.log('heights', maxHeight, this.__internal.pxSingleRowHeight, totalHeightNeeded, htmlWordWrapped);
 
-                        if (totalHeightNeeded > maxHeight) {
+                        if (totalHeightNeeded > maxHeight || longestLineWidth > maxWidth) {
                             fontSize--;
                             this.__internal.canvasContext.font = this.options.fontPrefix + ' ' + fontSize + 'pt ' + this.options.fontSuffix;
                         } else {
@@ -76,10 +81,17 @@
                     var htmlWordWrapped = '';
                     var words = textToProcess.split(' ');
                     var line = '';
+                    var longestLineWidth = 0;
 
                     // Calculate how many lines we need for a simple word-wrap operation
                     for(var n = 0; n < words.length; n++) {
                         var currentLine = line + words[n] + ' ';
+
+                        var widthCheck = this.__internal.canvasContext.measureText(words[n]).width;
+                        if (widthCheck > this.__internal.maxWidth) {
+                            longestLineWidth = widthCheck;
+                        }
+
                         if (wordWrap && this.__internal.canvasContext.measureText(currentLine).width > this.__internal.maxWidth && n > 0) {
                             if (printText) this.__internal.canvasContext.fillText(line, x, y);
                             line = words[n] + ' ';
@@ -92,7 +104,7 @@
                     }
                     if (printText) this.__internal.canvasContext.fillText(line, x, y);
 
-                    return htmlWordWrapped;
+                    return [htmlWordWrapped, line, longestLineWidth];
                 },
                 getTextHeight: function (textToCalculate) {
                     // Calculate the height we need based on the text
@@ -102,6 +114,7 @@
                     div.style.top  = '-9999px';
                     div.style.left = '-9999px';
                     div.style.font = this.__internal.canvasContext.font;
+                    div.style['line-height'] = 2;
                     div.innerHTML = textToCalculate; // + 'gqjy';
                     document.body.appendChild(div);
                     var totalHeightNeeded = div.offsetHeight;
