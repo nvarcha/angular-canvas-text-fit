@@ -114,7 +114,7 @@
                     div.style.top  = '-9999px';
                     div.style.left = '-9999px';
                     div.style.font = this.__internal.canvasContext.font;
-                    div.style['line-height'] = 2;
+                    div.style['line-height'] = this.__internal.pxLineHeight;
                     div.innerHTML = textToCalculate; // + 'gqjy';
                     document.body.appendChild(div);
                     var totalHeightNeeded = div.offsetHeight;
