@@ -13,7 +13,10 @@
     "AngularJS",
     "canvas",
     "fit",
-    "text"
+    "text",
+    "wordwrap",
+    "wrapper",
+    "shrink"
   ],
   "homepage": "",
   "ignore": [
